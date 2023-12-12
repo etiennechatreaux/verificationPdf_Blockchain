@@ -10,7 +10,7 @@ const web3 = new Web3('https://sepolia.infura.io/v3/267673d473ad4ee9b359135221fe
 // Replace these values with your own
 const privateKey = '0x4bc425a310abf22238a03cc32978f299db834c0f51dd58b18c458c295a75acaa';
 const contractAddress = '0xA944648391346217820b34E32CE00Baae85BCfB9';
-const abi = JSON.parse(fs.readFileSync('C:/Users/xtrem/Documents/Blockchain/abi.json', 'utf-8'));
+const abi = JSON.parse(fs.readFileSync('build/contracts/abi.json', 'utf-8'));
 
 // Create an instance of the contract
 const contract = new web3.eth.Contract(abi, contractAddress);
