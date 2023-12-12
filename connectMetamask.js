@@ -3,7 +3,7 @@ var web3 = new Web3(window.ethereum);
 
 
 var userAddress;
-const contract = new web3.eth.Contract(abi, '0xd9145CCE52D386f254917e481eB44e9943F39138');
+//const contract = new web3.eth.Contract(ABI, '0xd9145CCE52D386f254917e481eB44e9943F39138');
 
 function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -38,8 +38,8 @@ document.getElementById('connect-button').addEventListener('click', async () => 
         updateButtonStatus(true);
         document.cookie = "walletConnected=true; path=/";
 
-        const role = parseInt(await contract.methods.getRoleValue(accounts[0]).call());
-            window.location.href = "PageAccueil.html";
+    
+        window.location.href = "PageAccueil.html";
         
     }
 });
