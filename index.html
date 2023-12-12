@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="verify-paysera" content="46dbbcd85ca16a85a21fc4309380b47c">
+    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PZDTRDW"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+    <script src="Build\contracts\abi.json"></script>
+   
+    <title>Connexion</title>
+    <style>
+        
+        #connect-button {
+            display: block;
+            width: 200px;
+            height: 60px;
+            margin: 0 auto;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        #connect-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="connect-button">Connecter MetaMask</button>
+    </div>
+    <script src="connectMetamask.js"></script>
+</body>
+
+</html>
