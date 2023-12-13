@@ -1,6 +1,3 @@
-
-
-
 const { Web3 } = require('web3');
 const fs = require('fs');
 
@@ -31,37 +28,79 @@ async function checkPaymentReceived() {
 async function checkInvoiceExisting() {
   try {
     // Use the correct function name from the ABI
-    const isInvoiceExisting = await contract.methods.IsInvoiceExisting(pdfHash).call();
+    const isInvoiceExisting = await contract.methods.IsInvoiceExisitng(pdfHash).call();
     console.log('Invoice exists ? : ', isInvoiceExisting);
   } catch (error) {
     console.error('Error checking invoice existence:', error);
   }
 }
 
-// Call the functions
-checkPaymentSent();
-checkPaymentReceived();
-// checkInvoiceExisting();
 
+const pdfHash2 = '999';
 
-/*
-// Fonction pour envoyer le hash au smart contract
-async function storeHash() {
-  const accounts = await web3.eth.getAccounts();
+// Fonction d'écriture que vous souhaitez appeler
+const functionName = 'storeHash';
+const functionParams = pdfHash2; 
+// Remplacez par les paramètres de votre fonction
+const contractFunction = contract.methods[functionName](functionParams);
+fromAddress = '0xC7d3beb8E105d08d5CEc2647cA46b320735Ee547'
+
+async function storeHashAsync() {
+  web3.eth.accounts.signTransaction({
+    to: contractAddress,
+    data: contractFunction.encodeABI(),
+    gas: 220000,
+    gasPrice: 136698842990,
+    nonce: await web3.eth.getTransactionCount(fromAddress),
+  }, privateKey)
+    .then((signedTransaction) => {
+      web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+        .on('transactionHash', (hash) => {
+          console.log('Transaction hash:', hash);
+        })
+        .on('confirmation', (confirmationNumber, receipt) => {
+          console.log('Confirmation number:', confirmationNumber);
+          console.log('Receipt:', receipt);
+        })
+        .on('error', (error) => {
+          console.error('Transaction error:', error);
+        });
+    })
+    .catch((error) => {
+      console.error('Signing error:', error);
+    });
+  }
+
+// storeHashAsync().catch((error) => {
+//   console.error('Script error:', error);
+// });
+
+storeHashAsync();
+
+// async function storeHash(pdfHash2) {
+//   const accounts = await web3.eth.getAccounts();
+//   console.log(accounts[0])
   
-  // Appelez la fonction storeHash du smart contract
-  const result = await contract.methods.storeHash(pdfHash).send({
-    from: accounts[0],
-    gas: 3000000, // ajustez le gas en conséquence
-  });
+//   // Appelez la fonction storeHash du smart contract
+//   const result = await contract.methods.storeHash(pdfHash2).send({
+//     from: '0xC7d3beb8E105d08d5CEc2647cA46b320735Ee547',
+//     gas: 3000000, // ajustez le gas en conséquence
+//   });
 
-  console.log(result);
-}
+//   console.log(result);
+// }
+
+
+// Call the functions
+// checkPaymentSent();
+// checkPaymentReceived();
+// checkInvoiceExisting();
+// Appels de fonctions
+// storeHash(pdfHash2);
+
+
+
 
 // Fonction pour vérifier si le paiement a été envoyé
 
 
-// Appels de fonctions
-storeHash();
-
-*/
