@@ -36,7 +36,7 @@ async function checkInvoiceExisting() {
 }
 
 
-const pdfHash2 = '999';
+const pdfHash2 = '444';
 
 // Fonction d'écriture que vous souhaitez appeler
 const functionName = 'storeHash';
@@ -45,7 +45,7 @@ const functionParams = pdfHash2;
 const contractFunction = contract.methods[functionName](functionParams);
 fromAddress = '0xC7d3beb8E105d08d5CEc2647cA46b320735Ee547'
 
-async function storeHashAsync() {
+async function storeHashAsync(pdfHash2) {
   web3.eth.accounts.signTransaction({
     to: contractAddress,
     data: contractFunction.encodeABI(),
@@ -62,9 +62,13 @@ async function storeHashAsync() {
           console.log('Confirmation number:', confirmationNumber);
           console.log('Receipt:', receipt);
         })
+        .on('receipt', (receipt) => {
+          console.log('Transaction succesful with receipt:', receipt);
+        })
         .on('error', (error) => {
           console.error('Transaction error:', error);
         });
+        
     })
     .catch((error) => {
       console.error('Signing error:', error);
@@ -75,10 +79,10 @@ async function storeHashAsync() {
 //   console.error('Script error:', error);
 // });
 
-storeHashAsync();
+storeHashAsync(555);
 
 // async function storeHash(pdfHash2) {
-//   const accounts = await web3.eth.getAccounts();
+//   const accounts = await web3.eth.getAccounts(); 
 //   console.log(accounts[0])
   
 //   // Appelez la fonction storeHash du smart contract
