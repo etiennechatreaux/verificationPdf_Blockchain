@@ -1,4 +1,4 @@
-[
+const ABI= [
 	{
 		"inputs": [
 			{

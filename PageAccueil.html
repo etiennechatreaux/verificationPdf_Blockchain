@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   <title>Site d'aide au paiement de facture</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
+  <script src="storehash.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -92,7 +95,7 @@
 
     <!-- Input et bouton pour le chargement de fichier -->
     <input type="file" accept="application/pdf">
-    <button><script type="module" src="storehash.js"></script></button>
+    <button></button>
 
     <!-- Bouton pour le hachage du fichier -->
     <button>Hacher le fichier</button>
@@ -104,6 +107,7 @@
       <p style="font-weight: bold;">Vérifier la validité de la facture :</p>
       <button>Vérifier</button>
       <input type="text" placeholder="Vérifier">
+      
 
       <p></p>
       <p style="font-weight: bold;">Envoyer le paiement de la facture :</p>
@@ -181,6 +185,8 @@
 
             // Afficher le hachage dans l'élément p
             hashText.textContent = "Le hachage du fichier est: " + hex;
+            // Call storePDFHash from storehash.js
+            storePDFHash(hex);
           });
         };
 
@@ -258,5 +264,6 @@
       alert("Fonction savoir si paiement reçu appelée");
     }
   </script>
+
 </body>
 </html>

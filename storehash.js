@@ -1,25 +1,42 @@
-var web3 = new Web3(window.ethereum);
-const contractConnectWalletAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138';
-const provider = await detectEthereumProvider();
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById('fileInput');
+    const hashButton = document.getElementById('hashButton');
+    const hashText = document.getElementById('hashText');
 
-const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
+    // ABI de votre contrat
+    const ABI = [/* ABI de votre contrat ici */];
+    const contractConnectWalletAddress = '0xC7d3beb8E105d08d5CEc2647cA46b320735Ee547';
+    const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
 
-async function storePDFHash(event) {
-    event.preventDefault();
-    const hash = document.getElementById('pdfHash').value;
+    hashButton.addEventListener("click", function() {
+        if (input.files.length > 0) {
+            var file = input.files[0];
+            var reader = new FileReader();
 
-    try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-        console.log('Account:', account);
+            reader.onload = function() {
+                var buffer = reader.result;
+                crypto.subtle.digest("SHA-256", buffer).then(function(hash) {
+                    var hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+                    hashText.textContent = "Le hachage du fichier est: " + hex;
+                    storePDFHash(hex);
+                });
+            };
 
-        const result = await contract.methods.storeHash(hash).send({ from: account });
-        console.log('Transaction receipt:', result);
-        alert("Result: " + result.events.HashStored.returnValues.message);
-    } catch (error) {
-        console.error('Erreur lors de l\'ajout du hash PDF.', error);
-        alert("Une erreur s'est produite lors de l'ajout du hash PDF.");
+            reader.readAsArrayBuffer(file);
+        } else {
+            hashText.textContent = "Veuillez choisir un fichier PDF avant de hacher.";
+        }
+    });
+
+    async function storePDFHash(hash) {
+        try {
+            const accounts = await web3.eth.getAccounts();
+            const account = accounts[0];
+            const response = await contract.methods.storeHash(hash).send({ from: account });
+            console.log('Hash stocké avec succès:', response);
+        } catch (error) {
+            console.error('Erreur lors du stockage du hash:', error);
+        }
     }
-}
-
-document.getElementById('storeHashForm').addEventListener('submit', storePDFHash);
+});
