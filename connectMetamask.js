@@ -3,7 +3,7 @@ var web3 = new Web3(window.ethereum);
 
 
 var userAddress;
-//const contract = new web3.eth.Contract(ABI, '0xd9145CCE52D386f254917e481eB44e9943F39138');
+//const contract = new web3.eth.Contract(ABI, '0xA944648391346217820b34E32CE00Baae85BCfB9');
 
 function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');

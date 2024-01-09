@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   <title>Site d'aide au paiement de facture</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider"></script>
 
   <script src="storehash.js"></script>
   <style>
@@ -107,7 +108,7 @@
       <p style="font-weight: bold;">Vérifier la validité de la facture :</p>
       <button>Vérifier</button>
       <input type="text" placeholder="Vérifier">
-      
+
 
       <p></p>
       <p style="font-weight: bold;">Envoyer le paiement de la facture :</p>
@@ -186,7 +187,7 @@
             // Afficher le hachage dans l'élément p
             hashText.textContent = "Le hachage du fichier est: " + hex;
             // Call storePDFHash from storehash.js
-            storePDFHash(hex);
+             src="storehash.js"
           });
         };
 
