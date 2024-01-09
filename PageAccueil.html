@@ -33,8 +33,27 @@
             <button id="savoirSiPaiementEnvoyeButton">Paiement Envoyé</button>
             <input type="text" placeholder="Savoir si paiement reçu">
             <button id="savoirSiPaiementRecuButton">Paiement Reçu</button>
+            <input type="text" placeholder="Hash de la facture dont vous voulez suivre avancement" id="HashAvancement">
+            <!-- Barre de progression avec des points pour les étapes -->
+            <div></div><div></div><div></div>
+            <div id="progressBarContainer" style="width: 100%; background-color: #ddd; position: relative;">
+                <div id="progressBar" style="width: 0%; height: 20px; background-color: #4CAF50; position: absolute;"></div>
+                <div id="step1" class="step" style="left: 0;">Facture émise</div>
+                <div id="step2" class="step" style="left: 50%;">Paiement envoyé</div>
+                <div id="step3" class="step" style="left: 100%;">Paiement reçu</div>
+            </div>
+
+            <div></div>
+            <div></div>
+            <div></div><div></div><div></div>
+            <button id="checkProgressButton">Vérifier l'avancement du paiement</button>
+
         </div>
+        
     </div>
+    <!-- HTML pour la barre de progression et le bouton de vérification -->
+
+  
 
     <script src="storehash.js"></script>
     <script src="sendPayment.js"></script>
@@ -42,6 +61,7 @@
     <script src="receivePayment.js"></script>
     <script src="checkReceivedPayment.js"></script>
     <script src="déconnexion.js"></script>
+    <script src="progressBar.js"></script>
     
 
 
