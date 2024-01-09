@@ -36,6 +36,7 @@ contract pdf_hashes {
     //    hashesList = new uint[](0);
     //}
 
+    
     function paymentSent(string memory _hash) public returns (string memory) {
         if (isPaymentSent[_hash]) {
             return "Erreur: le paiement a deja ete envoye";
@@ -45,6 +46,25 @@ contract pdf_hashes {
             return "Succes: envoi du paiement enregistre";
         }
     }
+
+//Il aurait fallu utiliser des event:
+//                       event HashStored(string message, string hash);
+//
+//                      function storeHash(string memory _hash) public returns (string memory) {
+//                        if (isHashInArray[_hash]) {
+//                          emit HashStored("Erreur: ce pdf a deja ete ajoute", _hash);
+//                        return "Erreur: ce pdf a deja ete ajoute";
+//                  }
+//                else {
+//                  hashesList.push(_hash);
+//                isPaymentSent[_hash] = false;
+//              isPaymentReceived[_hash] = false;
+//            isHashInArray[_hash] = true;
+//          hashSender[_hash] = msg.sender;
+//        emit HashStored("Succes: Le pdf a bien ete ajoute", _hash);
+//      return "Succes: Le pdf a bien ete ajoute";
+//}
+//}
 
     function paymentReceived(string memory _hash) public returns (string memory) {
         if (msg.sender == hashSender[_hash]) {

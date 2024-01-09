@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <title>Site d'aide au paiement de facture</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider"></script>
+  <script src="Build/contracts/ABI.js"></script>
+</head>
+<body>
+  <!-- Barre de navigation -->
+  <div class="navbar">
+    <div>Facturation</div>
+    <div>Accueil</div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="container">
+    <p class="welcome-text">Bienvenue sur notre site. Choisissez un fichier et utilisez les boutons ci-dessous :</p>
+
+    <!-- Chargement de fichier -->
+    <input type="file" accept="application/pdf">
+    <button>Choisir un fichier</button>
+
+    <!-- Hachage du fichier -->
+    <button>Hacher le fichier</button>
+    <p class="hash-text"></p>
+
+    <!-- Boutons de vérification et de paiement -->
+    <div class="button-container">
+      <section>
+        <p style="font-weight: bold;">Vérifier la validité de la facture :</p>
+        <button>Vérifier</button>
+        <input type="text" placeholder="Vérifier">
+      </section>
+
+      <section>
+        <p style="font-weight: bold;">Envoyer le paiement de la facture :</p>
+        <button>Envoyer</button>
+        <input type="text" placeholder="Envoyer le paiement">
+      </section>
+
+      <section>
+        <p style="font-weight: bold;">Recevoir le paiement de la facture :</p>
+        <button>Recevoir</button>
+        <input type="text" placeholder="Recevoir le paiement">
+      </section>
+
+      <section>
+        <p style="font-weight: bold;">Cliquer pour savoir si le paiement a été bien envoyé :</p>
+        <button>Paiement envoyé</button>
+        <input type="text" placeholder="Savoir si paiement envoyé">
+      </section>
+
+      <section>
+        <p style="font-weight: bold;">Cliquer pour savoir si le paiement a été bien reçu :</p>
+        <button>Paiement reçu</button>
+        <input type="text" placeholder="Savoir si paiement reçu">
+      </section>
+    </div>
+  </div>
+
+  <script src="storehash.js"></script>
+  <script>
+    // Script pour l'interaction avec les éléments de la page
+    var input = document.querySelector("input[type='file']");
+    var chooseButton = document.querySelector("button");
+    var hashButton = document.querySelectorAll("button")[1];
+    var hashText = document.querySelector(".hash-text");
+    var buttons = document.querySelectorAll(".button-container button");
+
+    chooseButton.addEventListener("click", function() {
+      input.click();
+    });
+
+    input.addEventListener("change", handleFileUpload);
+    hashButton.addEventListener("click", handleFileHashing);
+
+    // Événements pour les autres boutons
+    buttons.forEach(function(button, index) {
+      button.addEventListener("click", function() {
+        switch(index) {
+          case 0: verifier(); break;
+          case 1: envoyerPaiement(); break;
+          case 2: recevoirPaiement(); break;
+          case 3: savoirSiPaiementEnvoye(); break;
+          case 4: savoirSiPaiementRecu(); break;
+        }
+      });
+    });
+
+    function handleFileUpload() {
+      // Logique de chargement du fichier
+    }
+
+    function handleFileHashing() {
+      // Logique de hachage du fichier
+    }
+
+    // Définition des fonctions pour chaque action
+    function verifier() { /* Logique de vérification */ }
+    function envoyerPaiement() { /* Logique d'envoi de paiement */ }
+    function recevoirPaiement() { /* Logique de réception de paiement */ }
+    function savoirSiPaiementEnvoye() { /* Logique de vérification du paiement envoyé */ }
+    function savoirSiPaiementRecu() { /* Logique de vérification du paiement reçu */ }
+  </script>
+</body>
+</html>

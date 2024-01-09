@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
+    import "Build/contracts/ABI.js";
+    document.addEventListener("DOMContentLoaded", function() {
     let web3;
     let contract;
 
@@ -22,13 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
         addEventListeners();
     }
 
-    // Hacher le fichier PDF et stocker le hash
-    async function handleHashButtonClick() {
-        const fileInput = document.getElementById('fileInput'); // ID de l'input de fichier
-        const hashText = document.querySelector('.hash-text'); // Sélecteur de l'élément pour afficher le hash
-
+    async function handleVerifyButtonClick() {
+        const hashInput = text.getElementById('verify'); // ID de l'input 
         if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
+            const hashverify = hashInput;
             const reader = new FileReader();
 
             reader.onload = async function() {
@@ -47,21 +45,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Stocker le hash dans le contrat
     async function storePDFHash(hash) {
         try {
             const accounts = await web3.eth.getAccounts();
             const account = accounts[0];
-            await contract.methods.storeHash(hash).send({ from: account });
-            console.log('Hash stocké avec succès');
+            const response = await contract.methods.storeHash(hash).send({ from: account });
+            console.log('Hash stocké avec succès:', response);
         } catch (error) {
-            if (error.message.includes("revert")) {
-                console.error("Erreur lors du stockage du hash: La transaction a échoué");
-            } else {
-                console.error('Erreur technique:', error);
-            }
+            console.error('Erreur lors du stockage du hash:', error);
         }
     }
-    
 
     // Ajout des gestionnaires d'événements
     function addEventListeners() {

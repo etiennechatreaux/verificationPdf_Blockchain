@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <title>Site d'aide au paiement de facture</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider"></script>
+  <script src="Build/contracts/ABI.js"></script>
+  
+</head>
+<body>
+  <div class="navbar">
+    <div>Facturation</div>
+    <div>Accueil</div>
+  </div>
+
+  <div class="container">
+
+    <!-- Phrase de bienvenue -->
+    <p class="welcome-text">Bienvenue sur notre site. Choisissez un fichier et utilisez les boutons ci-dessous :</p>
+
+    <!-- Input et bouton pour le chargement de fichier -->
+    <input type="file" accept="application/pdf">
+    <button></button>
+
+    <!-- Bouton pour le hachage du fichier -->
+    <button>Hacher le fichier</button>
+    <p class="hash-text"></p>
+
+    <!-- Conteneur pour les boutons supplémentaires -->
+    <div class="button-container">
+      <p></p>
+      <p style="font-weight: bold;">Vérifier la validité de la facture :</p>
+      <button>Vérifier</button>
+      <input type="text" placeholder="Vérifier">
+
+
+      <p></p>
+      <p style="font-weight: bold;">Envoyer le paiement de la facture :</p>
+      <button>Envoyer</button>
+      <input type="text" placeholder="Envoyer le paiement">
+
+      <p></p>
+      <p style="font-weight: bold;">Recevoir le paiement de la facture :</p>
+      <button>Recevoir</button>
+      <input type="text" placeholder="Recevoir le paiement">
+
+      <p></p>
+      <p style="font-weight: bold;">Cliquer pour savoir si le paiement a été bien envoyé :</p>
+      <button>Paiement envoyé</button>
+      <input type="text" placeholder="Savoir si paiement envoyé">
+
+      <p></p>
+      <p style="font-weight: bold;">Cliquer pour savoir si le paiement a été bien reçu :</p>
+      <button>Paiement reçu</button>
+      <input type="text" placeholder="Savoir si paiement reçu">
+    </div>
+  </div>
+
+  <script>
+    // Récupérer les éléments input, button et p
+    var input = document.querySelector("input");
+    var chooseButton = document.querySelector("button");
+    var hashButton = document.querySelector("button:nth-of-type(2)");
+    var hashText = document.querySelector("p");
+    var verifyButton = document.querySelector("button:nth-of-type(3)");
+    var sendButton = document.querySelector("button:nth-of-type(4)");
+    var receiveButton = document.querySelector("button:nth-of-type(5)");
+    var sentButton = document.querySelector("button:nth-of-type(6)");
+    var receivedButton = document.querySelector("button:nth-of-type(7)");
+ 
+ //ICI
+ </script>
+   
+
+<script src="storehash.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Ajouter ici les appels aux fonctions définies dans storehash.js
+        const hashButton = document.getElementById('hashButton');
+        hashButton.addEventListener("click", handleHashButtonClick);
+
+        const verifierButton = document.getElementById('verifierButton');
+        verifierButton.addEventListener("click", window.verifier);
+
+        const envoyerPaiementButton = document.getElementById('envoyerPaiementButton');
+        envoyerPaiementButton.addEventListener("click", window.envoyerPaiement);
+
+        const recevoirPaiementButton = document.getElementById('recevoirPaiementButton');
+        recevoirPaiementButton.addEventListener("click", window.recevoirPaiement);
+
+        const savoirSiPaiementEnvoyeButton = document.getElementById('savoirSiPaiementEnvoyeButton');
+        savoirSiPaiementEnvoyeButton.addEventListener("click", window.savoirSiPaiementEnvoye);
+
+        const savoirSiPaiementRecuButton = document.getElementById('savoirSiPaiementRecuButton');
+        savoirSiPaiementRecuButton.addEventListener("click", window.savoirSiPaiementRecu);
+    });
+</script>
+</body>
+</html>0 // // Ajouter un écouteur d'événement au bouton "Choisir un fichier" pour déclencher le clic sur l'input
+    // chooseButton.addEventListener("click", function() {
+    //   input.click();
+    // });
+
+    // // Ajouter un écouteur d'événement à l'input pour récupérer le fichier choisi
+    // input.addEventListener("change", function() {
+    //   var file = input.files[0]; // Le premier fichier de la liste
+    //   if (file) {
+    //     // Créer un objet FormData pour envoyer le fichier au serveur
+    //     var formData = new FormData();
+    //     formData.append("file", file);
+
+    //     // Créer un objet XMLHttpRequest pour faire la requête au serveur
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("POST", "/upload"); // Remplacer "/upload" par l'URL du serveur
+    //     xhr.send(formData); // Envoyer le formulaire avec le fichier
+    //   }
+    // });
+
+    // // Ajouter un écouteur d'événement au bouton "Hacher le fichier" pour calculer le hachage du fichier
+    // hashButton.addEventListener("click", function() {
+    //   // Vérifier si un fichier a été choisi
+    //   if (input.files.length > 0) {
+    //     // Récupérer le premier fichier de la liste
+    //     var file = input.files[0];
+
+    //     // Créer un objet FileReader pour lire le contenu du fichier
+    //     var reader = new FileReader();
+
+    //     // Définir la fonction à exécuter lorsque le fichier est lu
+    //     reader.onload = function() {
+    //       // Récupérer le contenu du fichier sous forme d'un ArrayBuffer
+    //       var buffer = reader.result;
+
+    //       // Utiliser l'API SubtleCrypto pour calculer le hachage SHA-256 du buffer
+    //       crypto.subtle.digest("SHA-256", buffer).then(function(hash) {
+    //         // Convertir le hachage en une chaîne hexadécimale
+    //         var hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+
+    //         // Afficher le hachage dans l'élément p
+    //         hashText.textContent = "Le hachage du fichier est: " + hex;
+
+    //       });
+    //     };
+
+    //     // Lire le fichier comme un ArrayBuffer
+    //     reader.readAsArrayBuffer(file);
+    //   }
+    //   else {
+    //     // Afficher un message d'erreur si aucun fichier n'a été choisi
+    //     hashText.textContent = "Veuillez choisir un fichier PDF avant de hacher.";
+    //   }
+    // });
+
+    // // Ajouter un écouteur d'événement aux cinq autres boutons pour exécuter la fonction correspondante
+    // verifyButton.addEventListener("click", function() {
+    //   // Appeler la fonction vérifier
+    //   verifier();
+    // });
+    // sendButton.addEventListener("click", function() {
+    //   // Appeler la fonction envoyer le paiement
+    //   envoyerPaiement();
+    // });
+    // receiveButton.addEventListener("click", function() {
+    //   // Appeler la fonction recevoir le paiement
+    //   recevoirPaiement();
+    // });
+    // sentButton.addEventListener("click", function() {
+    //   // Appeler la fonction savoir si paiement envoyé
+    //   savoirSiPaiementEnvoye();
+    // });
+    // receivedButton.addEventListener("click", function() {
+    //   // Appeler la fonction savoir si paiement reçu
+    //   savoirSiPaiementRecu();
+    // });
+
+    // // Définir les fonctions à appeler pour chaque bouton
+    // // Vous pouvez modifier ces fonctions selon vos besoins
+
+    // function verifier() {
+    //   // Cette fonction vérifie si le fichier PDF choisi est valide
+    //   // Par exemple, vous pouvez utiliser une bibliothèque JavaScript comme PDF.js pour lire le fichier et vérifier son contenu
+    //   // Vous pouvez aussi afficher un message ou un indicateur visuel pour informer l'utilisateur du résultat de la vérification
+    //   // Ici, je vais juste afficher un message de test
+    //   alert("Fonction vérifier appelée");
+    // }
+
+    // function envoyerPaiement() {
+    //   // Cette fonction envoie le paiement au destinataire
+    //   // Par exemple, vous pouvez utiliser une API de paiement comme Stripe ou PayPal pour effectuer le paiement
+    //   // Vous pouvez aussi afficher un message ou un indicateur visuel pour informer l'utilisateur du résultat du paiement
+    //   // Ici, je vais juste afficher un message de test
+    //   alert("Fonction envoyer le paiement appelée");
+    // }
+
+    // function recevoirPaiement() {
+    //   // Cette fonction reçoit le paiement de l'expéditeur
+    //   // Par exemple, vous pouvez utiliser une API de paiement comme Stripe ou PayPal pour recevoir le paiement
+    //   // Vous pouvez aussi afficher un message ou un indicateur visuel pour informer l'utilisateur du résultat du paiement
+    //   // Ici, je vais juste afficher un message de test
+    //   alert("Fonction recevoir le paiement appelée");
+    // }
+
+    // function savoirSiPaiementEnvoye() {
+    //   // Cette fonction vérifie si le paiement a été envoyé
+    //   // Par exemple, vous pouvez utiliser une API de paiement comme Stripe ou PayPal pour vérifier le statut du paiement
+    //   // Vous pouvez aussi afficher un message ou un indicateur visuel pour informer l'utilisateur du résultat de la vérification
+    //   // Ici, je vais juste afficher un message de test
+    //   alert("Fonction savoir si paiement envoyé appelée");
+    // }
+
+    // function savoirSiPaiementRecu() {
+    //   // Cette fonction vérifie si le paiement a été reçu
+    //   // Par exemple, vous pouvez utiliser une API de paiement comme Stripe ou PayPal pour vérifier le statut du paiement
+    //   // Vous pouvez aussi afficher un message ou un indicateur visuel pour informer l'utilisateur du résultat de la vérification
+    //   // Ici, je vais juste afficher un message de test
+    //   alert("Fonction savoir si paiement reçu appelée");
+    // }

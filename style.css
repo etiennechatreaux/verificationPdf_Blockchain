@@ -1,0 +1,72 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Style de la barre de navigation */
+    .navbar {
+      background-color: blue;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 25px;
+      display: flex;
+      justify-content: space-between; /* Pour aligner les éléments à gauche et à droite */
+      align-items: center; /* Pour aligner les éléments verticalement au centre */
+    }
+
+    /* Style du conteneur principal */
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style du conteneur des boutons */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Style des boutons et des champs de texte */
+    .button-container input,
+    .button-container button,
+    input[type="file"],
+    button {
+      font-family: 'Roboto', sans-serif; 
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    /* Style du paragraphe pour afficher le hachage */
+    .hash-text {
+      margin-top: 10px;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif; /* Utiliser la police 'Roboto' pour ces éléments */
+    }
+
+    /* Style du paragraphe pour le texte de bienvenue */
+    .welcome-text {
+    font-weight: bold;
+    font-size: 20px; /* Changer la taille du texte en pixels selon vos préférences */
+    font-family: 'Roboto', sans-serif; /* Utiliser la police 'Roboto' pour ce texte */
+    }
+

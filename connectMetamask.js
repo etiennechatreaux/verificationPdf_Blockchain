@@ -19,6 +19,9 @@ function updateButtonStatus(connected) {
     }
 }
 
+function getUserAddressFromCookie() {
+    return getCookie('userAddress');
+}
 async function checkWalletConnection() {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     const button = document.getElementById('connect-button');
