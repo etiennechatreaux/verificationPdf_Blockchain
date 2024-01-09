@@ -1,18 +1,22 @@
-let web3;
-let contract;
+document.addEventListener("DOMContentLoaded", function() {
+    let web3;
+    let contract;
 
-async function initWeb3() {
-    const provider = await detectEthereumProvider();
-
-    if (provider) {
-        web3 = new Web3(provider);
-        // Initialiser le contrat après que Web3 est configuré
-        await initContract();
-    } else {
-        console.error("Veuillez installer MetaMask!");
+    async function initWeb3() {
+        if (window.ethereum) {
+            web3 = new Web3(window.ethereum);
+            try {
+                // Demander l'accès au compte si nécessaire
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                // Initialiser le contrat après que Web3 est configuré
+                initContract();
+            } catch (error) {
+                console.error("Accès refusé par l'utilisateur.");
+            }
+        } else {
+            console.error("Veuillez installer MetaMask!");
+        }
     }
-}
-
 async function initContract() {
     const contractConnectWalletAddress = '0xA944648391346217820b34E32CE00Baae85BCfB9';
     const contractABI = [ABI];
@@ -63,6 +67,7 @@ async function storePDFHash(hash) {
 
 // Initialiser Web3 et le contrat
 initWeb3();
+});
 
 // document.addEventListener("DOMContentLoaded", function() {
 //     const input = document.getElementById('fileInput');
